@@ -24,12 +24,14 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 
 2. In your MCP client code configuration or **Claude** settings (file `claude_desktop_config.json`) add `serper` mcp server:
     ```json
-    "mcpServers": {
-        "serper": {
-            "command": "uvx",
-            "args": ["serper-mcp-server"],
-            "env": {
-                "SERPER_API_KEY": "<Your Serper API key>"
+    {
+        "mcpServers": {
+            "serper": {
+                "command": "uvx",
+                "args": ["serper-mcp-server"],
+                "env": {
+                    "SERPER_API_KEY": "<Your Serper API key>"
+                }
             }
         }
     }
@@ -49,12 +51,14 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 
 3. Add the configuration for you client:
     ```json
-    "mcpServers": {
-        "time": {
-            "command": "python",
-            "args": ["-m", "serper_mcp_server"],
-            "env": {
-                "SERPER_API_KEY": "<Your Serper API key>"
+    {
+        "mcpServers": {
+            "serper": {
+                "command": "python3",
+                "args": ["-m", "serper_mcp_server"],
+                "env": {
+                    "SERPER_API_KEY": "<Your Serper API key>"
+                }
             }
         }
     }
@@ -72,12 +76,14 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 
 2. MCP client code configuration or **Claude** settings, add `serper` mcp server:
     ```json
-    "mcpServers": {
-        "serper": {
-            "command": "python",    // or python3
-            "args": ["serper-mcp-server"],
-            "env": {
-                "SERPER_API_KEY": "<Your Serper API key>"
+    {
+        "mcpServers": {
+            "serper": {
+                "command": "python3",
+                "args": ["serper-mcp-server"],
+                "env": {
+                    "SERPER_API_KEY": "<Your Serper API key>"
+                }
             }
         }
     }
