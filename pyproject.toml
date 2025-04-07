@@ -1,6 +1,6 @@
 [project]
 name = "serper-mcp-server"
-version = "0.0.1"
+version = "0.0.2"
 description = "A MCP server for Serper"
 keywords = ["serper", "mcp", "server", "google", "search"]
 authors = [
