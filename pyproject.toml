@@ -16,5 +16,10 @@ dependencies = [
     "python-dotenv>=1.1.0",
 ]
 
+[project.urls]
+"Homepage" = "https://github.com/garymengcom/serper-mcp-server"
+"Bug Tracker" = "https://github.com/garymengcom/serper-mcp-server/issues"
+
+
 [project.scripts]
 serper-mcp-server = "serper_mcp_server:main"
