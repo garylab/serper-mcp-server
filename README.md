@@ -48,7 +48,10 @@ Add to your Claude settings in file `claude_desktop_config.json`:
     "mcpServers": {
         "serper": {
             "command": "uvx",
-            "args": ["serper-mcp-server"]
+            "args": ["serper-mcp-server"],
+            "env": {
+                "SERPER_API_KEY": "<Your Serper API key>"
+            }
         }
     }
     ```
@@ -57,7 +60,10 @@ Add to your Claude settings in file `claude_desktop_config.json`:
     "mcpServers": {
         "time": {
             "command": "python",
-            "args": ["-m", "serper_mcp_server"]
+            "args": ["-m", "serper_mcp_server"],
+            "env": {
+                "SERPER_API_KEY": "<Your Serper API key>"
+            }
         }
     }
     ```
@@ -77,13 +83,6 @@ Or if you've installed the package in a specific directory or are developing on 
 cd path/to/servers/src/serper
 npx @modelcontextprotocol/inspector uv run serper-mcp-server
 ```
-
-## Examples of Questions for Claude
-
-1. "What time is it now?" (will use system timezone)
-2. "What time is it in Tokyo?"
-3. "When it's 4 PM in New York, what time is it in London?"
-4. "Convert 9:30 AM Tokyo time to New York time"
 
 
 ## License
