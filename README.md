@@ -1,4 +1,4 @@
-# Time MCP Server
+# Serper MCP Server
 
 A Model Context Protocol server that provides **Google Search via Serper**. This server enables LLMs to get search result information from Google.
 
