@@ -16,34 +16,13 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
     - `page` (integer): The page number to return, first page is 1 (default: 1)
 
 
-## Installation
+## Usage
 
 ### Using `uv` (recommended)
 
-When using [`uv`](https://docs.astral.sh/uv/) no specific installation is needed. We will
-use [`uvx`](https://docs.astral.sh/uv/guides/tools/) to directly run *serper-mcp-server*.
+1. Make sure you had installed [`uv`](https://docs.astral.sh/uv/) on your os system.
 
-### Using `pip`
-
-Alternatively you can install `serper-mcp-server` via pip:
-
-```bash
-pip install serper-mcp-server
-```
-
-After installation, you can run it as a script using:
-
-```bash
-python -m serper_mcp_server
-```
-
-## Configuration
-
-### Configure for Claude.app
-
-Add to your Claude settings in file `claude_desktop_config.json`:
-
-- Using `uvx`
+2. In your MCP client code configuration or **Claude** settings (file `claude_desktop_config.json`) add `serper` mcp server:
     ```json
     "mcpServers": {
         "serper": {
@@ -55,12 +34,48 @@ Add to your Claude settings in file `claude_desktop_config.json`:
         }
     }
     ```
-- Using `pip`
+    `uv` will download mcp server automatically using `uvx` from [pypi.org](https://pypi.org/project/serper-mcp-server/) and apply to your MCP client.
+
+### Using `pip` for project
+1. Add `serper-mcp-server` to your MCP client code `requirements.txt` file.
+    ```txt
+    serper-mcp-server
+    ```
+
+2. Install the dependencies.
+    ```shell
+    pip install -r requirements.txt
+    ```
+
+3. Add the configuration for you client:
     ```json
     "mcpServers": {
         "time": {
             "command": "python",
             "args": ["-m", "serper_mcp_server"],
+            "env": {
+                "SERPER_API_KEY": "<Your Serper API key>"
+            }
+        }
+    }
+    ```
+
+
+### Using `pip` for globally usage
+
+1. Make sure the `pip` or `pip3` is in your os system.
+    ```bash
+    pip install serper-mcp-server
+    # or
+    pip3 install serper-mcp-server
+    ```
+
+2. MCP client code configuration or **Claude** settings, add `serper` mcp server:
+    ```json
+    "mcpServers": {
+        "serper": {
+            "command": "python",    // or python3
+            "args": ["serper-mcp-server"],
             "env": {
                 "SERPER_API_KEY": "<Your Serper API key>"
             }
