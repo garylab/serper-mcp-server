@@ -1,4 +1,5 @@
 # Serper MCP Server
+[![smithery badge](https://smithery.ai/badge/@garylab/serper-mcp-server)](https://smithery.ai/server/@garylab/serper-mcp-server)
 
 A Model Context Protocol server that provides **Google Search via Serper**. This server enables LLMs to get search result information from Google.
 
@@ -17,6 +18,14 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 
 
 ## Usage
+
+### Installing via Smithery
+
+To install Serper MCP Server for Claude Desktop automatically via [Smithery](https://smithery.ai/server/@garylab/serper-mcp-server):
+
+```bash
+npx -y @smithery/cli install @garylab/serper-mcp-server --client claude
+```
 
 ### Using `uv` (recommended)
 
