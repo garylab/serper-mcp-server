@@ -1,72 +1,71 @@
-from typing import Optional, Dict, Any, List, Sequence
-import os
-from enum import StrEnum
-from pydantic import BaseModel, Field
+from typing import Any, List, Sequence
 from mcp.server import Server
 from mcp.server.stdio import stdio_server
 from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource
 from dotenv import load_dotenv
 import json
-import aiohttp
-import ssl
-import certifi
+
+from .core import google, scape
+from .enums import SerperTools
+from .schemas import SearchRequest, MapsRequest, ReviewsRequest, ShoppingRequest, LensRequest, AutocorrectRequest, \
+    ParentsRequest, WebpageRequest
 
 load_dotenv()
 
 server = Server("Serper")
 
-class SerperTools(StrEnum):
-    GOOGLE_SEARCH = "google_search"
-
-
-class GoogleSearchRequest(BaseModel):
-    q: str = Field(..., description="The query to search for")
-    gl: Optional[str] = Field(None, description="The country to search in, e.g. us, uk, ca, au, etc.") 
-    location: Optional[str] = Field(None, description="The location to search in, e.g. San Francisco, CA, USA")
-    hl: Optional[str] = Field(None, description="The language to search in, e.g. en, es, fr, de, etc.")
-    tbs: Optional[str] = Field(None, description="The time period to search in, e.g. d, w, m, y")
-    num: Optional[int] = Field(10, max=100, description="The number of results to return, max is 100")
-    page: Optional[int] = Field(1, min=1, description="The page number to return, first page is 1")
-
-
-async def google_search(request: GoogleSearchRequest) -> Dict[str, Any]:
-    url = "https://google.serper.dev/search"
-
-    payload = request.model_dump(exclude_none=True)
-    headers = {
-        'X-API-KEY': os.getenv("SERPER_API_KEY"),
-        'Content-Type': 'application/json'
-    }
-
-    ssl_context = ssl.create_default_context(cafile=certifi.where())
-    connector = aiohttp.TCPConnector(ssl=ssl_context)
-
-    async with aiohttp.ClientSession(connector=connector) as session:
-        async with session.post(url, headers=headers, json=payload) as response:
-            response.raise_for_status()
-            return await response.json()
+google_request_map = {
+    SerperTools.GOOGLE_SEARCH: SearchRequest,
+    SerperTools.GOOGLE_SEARCH_IMAGES: SearchRequest,
+    SerperTools.GOOGLE_SEARCH_VIDEOS: SearchRequest,
+    SerperTools.GOOGLE_SEARCH_PLACES: AutocorrectRequest,
+    SerperTools.GOOGLE_SEARCH_MAPS: MapsRequest,
+    SerperTools.GOOGLE_SEARCH_REVIEWS: ReviewsRequest,
+    SerperTools.GOOGLE_SEARCH_NEWS: SearchRequest,
+    SerperTools.GOOGLE_SEARCH_SHOPPING: ShoppingRequest,
+    SerperTools.GOOGLE_SEARCH_LENS: LensRequest,
+    SerperTools.GOOGLE_SEARCH_SCHOLAR: AutocorrectRequest,
+    SerperTools.GOOGLE_SEARCH_PARENTS: ParentsRequest,
+    SerperTools.GOOGLE_SEARCH_AUTOCOMPLETE: AutocorrectRequest,
+}
 
 
 @server.list_tools()
 async def list_tools() -> List[Tool]:
-    return [
-        Tool(
-            name=SerperTools.GOOGLE_SEARCH,
-            description="Search Google for a query",
-            inputSchema=GoogleSearchRequest.model_json_schema(),
-        )
-    ]
+    tools = []
 
+    for k, v in google_request_map.items():
+        tools.append(
+            Tool(
+                name=k,
+                description="Search Google for results",
+                inputSchema=v.model_json_schema(),
+            ),
+        )
+
+    tools.append(Tool(
+        name=SerperTools.WEBPAGE_SCRAPE,
+        description="Scrape webpage by url",
+        inputSchema=WebpageRequest.model_json_schema(),
+    ))
+
+    return tools
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict[str, Any]) -> Sequence[TextContent | ImageContent | EmbeddedResource]:
     try:
-        if name == SerperTools.GOOGLE_SEARCH.value:
-            request = GoogleSearchRequest(**arguments)
-            result = await google_search(request)
+        if name == SerperTools.WEBPAGE_SCRAPE:
+            request = WebpageRequest(**arguments)
+            result = await scape(request)
             return [TextContent(text=json.dumps(result, indent=2), type="text")]
-        else:
+
+        if not SerperTools.has_value(name):
             raise ValueError(f"Tool {name} not found")
+
+        selected = SerperTools(name)
+        request = google_request_map[selected](**arguments)
+        result = await google(request)
+        return [TextContent(text=json.dumps(result, indent=2), type="text")]
     except Exception as e:
         return [TextContent(text=f"Error: {str(e)}", type="text")]
 
