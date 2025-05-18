@@ -5,16 +5,19 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 
 ## Available Tools
 
-- `google_search` - Get the result of the search.
-  - Required arguments:
-    - `q` (string): The query to search for
-  - Optional arguments:
-    - `gl` (string): The country to search in, e.g. us, uk, ca, au, etc.
-    - `location` (string): The location to search in, e.g. San Francisco, CA, USA
-    - `hl` (string): The language to search in, e.g. en, es, fr, de, etc.
-    - `tbs` (string): The time period to search in, e.g. d, w, m, y
-    - `num` (integer): The number of results to return, max is 100 (default: 10)
-    - `page` (integer): The page number to return, first page is 1 (default: 1)
+- `google_search` - Set [all the parameters](src/serper_mcp_server/schemas.py#L15)
+- `google_search_images` - Set [all the parameters](src/serper_mcp_server/schemas.py#L15)
+- `google_search_videos` - Set [all the parameters](src/serper_mcp_server/schemas.py#L15)
+- `google_search_places` - Set [all the parameters](src/serper_mcp_server/schemas.py#L20)
+- `google_search_maps` - Set [all the parameters](src/serper_mcp_server/schemas.py#L24)
+- `google_search_reviews` - Set [all the parameters](src/serper_mcp_server/schemas.py#L34)
+- `google_search_news` - Set [all the parameters](src/serper_mcp_server/schemas.py#L15)
+- `google_search_shopping` - Set [all the parameters](src/serper_mcp_server/schemas.py#L45)
+- `google_search_lens` - Set [all the parameters](src/serper_mcp_server/schemas.py#L50)
+- `google_search_scholar` - Set [all the parameters](src/serper_mcp_server/schemas.py#L20)
+- `google_search_parents` - Set [all the parameters](src/serper_mcp_server/schemas.py#L56)
+- `google_search_autocomplete` - Set [all the parameters](src/serper_mcp_server/schemas.py#L20)
+- `webpage_scrape` - Set [all the parameters](src/serper_mcp_server/schemas.py#L62)
 
 
 ## Usage
