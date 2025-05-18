@@ -7,6 +7,9 @@ from pydantic import BaseModel
 
 from .schemas import WebpageRequest
 
+SERPER_API_KEY = str.strip(os.getenv("SERPER_API_KEY", ""))
+AIOHTTP_TIMEOUT = int(os.getenv("AIOHTTP_TIMEOUT", "15"))
+
 
 async def google(request: BaseModel) -> Dict[str, Any]:
     url = "https://google.serper.dev/search"
@@ -21,14 +24,15 @@ async def scape(request: WebpageRequest) -> Dict[str, Any]:
 async def fetch_json(url: str, request: BaseModel) -> Dict[str, Any]:
     payload = request.model_dump(exclude_none=True)
     headers = {
-        'X-API-KEY': os.getenv("SERPER_API_KEY"),
+        'X-API-KEY': SERPER_API_KEY,
         'Content-Type': 'application/json'
     }
 
     ssl_context = ssl.create_default_context(cafile=certifi.where())
     connector = aiohttp.TCPConnector(ssl=ssl_context)
 
-    async with aiohttp.ClientSession(connector=connector) as session:
+    timeout = aiohttp.ClientTimeout(total=AIOHTTP_TIMEOUT)
+    async with aiohttp.ClientSession(connector=connector, timeout=timeout) as session:
         async with session.post(url, headers=headers, json=payload) as response:
             response.raise_for_status()
             return await response.json()

@@ -5,10 +5,18 @@ from mcp.types import Tool, TextContent, ImageContent, EmbeddedResource
 from dotenv import load_dotenv
 import json
 
-from .core import google, scape
+from .core import google, scape, SERPER_API_KEY
 from .enums import SerperTools
-from .schemas import SearchRequest, MapsRequest, ReviewsRequest, ShoppingRequest, LensRequest, AutocorrectRequest, \
-    ParentsRequest, WebpageRequest
+from .schemas import (
+    SearchRequest,
+    MapsRequest,
+    ReviewsRequest,
+    ShoppingRequest,
+    LensRequest,
+    AutocorrectRequest,
+    ParentsRequest,
+    WebpageRequest
+)
 
 load_dotenv()
 
@@ -37,7 +45,7 @@ async def list_tools() -> List[Tool]:
     for k, v in google_request_map.items():
         tools.append(
             Tool(
-                name=k,
+                name=k.value,
                 description="Search Google for results",
                 inputSchema=v.model_json_schema(),
             ),
@@ -53,8 +61,11 @@ async def list_tools() -> List[Tool]:
 
 @server.call_tool()
 async def call_tool(name: str, arguments: dict[str, Any]) -> Sequence[TextContent | ImageContent | EmbeddedResource]:
+    if not SERPER_API_KEY:
+        return [TextContent(text=f"SERPER_API_KEY is empty!", type="text")]
+
     try:
-        if name == SerperTools.WEBPAGE_SCRAPE:
+        if name == SerperTools.WEBPAGE_SCRAPE.value:
             request = WebpageRequest(**arguments)
             result = await scape(request)
             return [TextContent(text=json.dumps(result, indent=2), type="text")]
