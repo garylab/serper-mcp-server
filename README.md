@@ -3,6 +3,10 @@
 
 A Model Context Protocol server that provides **Google Search via Serper**. This server enables LLMs to get search result information from Google.
 
+<a href="https://glama.ai/mcp/servers/@garylab/serper-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@garylab/serper-mcp-server/badge" alt="Serper Server MCP server" />
+</a>
+
 ## Available Tools
 
 - `google_search` - Set [all the parameters](src/serper_mcp_server/schemas.py#L15)
