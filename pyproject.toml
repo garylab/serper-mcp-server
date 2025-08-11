@@ -1,6 +1,6 @@
 [project]
 name = "serper-mcp-server"
-version = "0.0.4"
+dynamic = ["version"]
 description = "A MCP server for Serper"
 keywords = ["serper", "mcp", "server", "google", "search"]
 authors = [
@@ -21,6 +21,13 @@ dependencies = [
 "Bug Tracker" = "https://github.com/garymengcom/serper-mcp-server/issues"
 "Author Blog" = "https://garymeng.com"
 
+[build-system]
+requires = ["setuptools>=61.0", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+version_scheme = "post-release"
+local_scheme = "no-local-version"
 
 [project.scripts]
 serper-mcp-server = "serper_mcp_server:main"
