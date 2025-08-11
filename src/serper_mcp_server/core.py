@@ -4,15 +4,16 @@ from typing import Dict, Any
 import certifi
 import aiohttp
 from pydantic import BaseModel
-
+from .enums import SerperTools
 from .schemas import WebpageRequest
 
 SERPER_API_KEY = str.strip(os.getenv("SERPER_API_KEY", ""))
 AIOHTTP_TIMEOUT = int(os.getenv("AIOHTTP_TIMEOUT", "15"))
 
 
-async def google(request: BaseModel) -> Dict[str, Any]:
-    url = "https://google.serper.dev/search"
+async def google(tool: SerperTools, request: BaseModel) -> Dict[str, Any]:
+    uri_path = tool.value.spit("_")[-1]
+    url = f"https://google.serper.dev/{uri_path}"
     return await fetch_json(url, request)
 
 

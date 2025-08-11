@@ -73,9 +73,9 @@ async def call_tool(name: str, arguments: dict[str, Any]) -> Sequence[TextConten
         if not SerperTools.has_value(name):
             raise ValueError(f"Tool {name} not found")
 
-        selected = SerperTools(name)
-        request = google_request_map[selected](**arguments)
-        result = await google(request)
+        tool = SerperTools(name)
+        request = google_request_map[tool](**arguments)
+        result = await google(tool, request)
         return [TextContent(text=json.dumps(result, indent=2), type="text")]
     except Exception as e:
         return [TextContent(text=f"Error: {str(e)}", type="text")]
