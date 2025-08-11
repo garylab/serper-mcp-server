@@ -12,7 +12,7 @@ AIOHTTP_TIMEOUT = int(os.getenv("AIOHTTP_TIMEOUT", "15"))
 
 
 async def google(tool: SerperTools, request: BaseModel) -> Dict[str, Any]:
-    uri_path = tool.value.spit("_")[-1]
+    uri_path = tool.value.split("_")[-1]
     url = f"https://google.serper.dev/{uri_path}"
     return await fetch_json(url, request)
 
