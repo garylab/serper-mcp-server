@@ -15,10 +15,10 @@ class BaseRequest(BaseModel):
     hl: Optional[str] = Field(
         None, description="The language to search in, e.g. en, es, fr, de, etc."
     )
-    page: Optional[int] = Field(
-        1,
-        ge=1,
-        description="The page number to return, first page is 1 (integer value)",
+    page: Optional[str] = Field(
+        "1",
+        pattern=r"^[1-9]\d*$",
+        description="The page number to return, first page is 1 (integer value as string)",
     )
 
 
@@ -26,16 +26,18 @@ class SearchRequest(BaseRequest):
     tbs: Optional[str] = Field(
         None, description="The time period to search in, e.g. d, w, m, y"
     )
-    num: int = Field(
-        10,
-        le=100,
-        description="The number of results to return, max is 100 (integer value)",
+    num: str = Field(
+        "10",
+        pattern=r"^([1-9]|[1-9]\d|100)$",
+        description="The number of results to return, max is 100 (integer value as string)",
     )
 
 
 class AutocorrectRequest(BaseRequest):
-    autocorrect: Optional[bool] = Field(
-        True, description="Automatically correct (boolean value: true/false)"
+    autocorrect: Optional[str] = Field(
+        "true",
+        pattern=r"^(true|false)$",
+        description="Automatically correct (boolean value as string: 'true' or 'false')",
     )
 
 
@@ -50,10 +52,10 @@ class MapsRequest(BaseModel):
     hl: Optional[str] = Field(
         None, description="The language to search in, e.g. en, es, fr, de, etc."
     )
-    page: Optional[int] = Field(
-        1,
-        ge=1,
-        description="The page number to return, first page is 1 (integer value)",
+    page: Optional[str] = Field(
+        "1",
+        pattern=r"^[1-9]\d*$",
+        description="The page number to return, first page is 1 (integer value as string)",
     )
 
 
@@ -61,9 +63,10 @@ class ReviewsRequest(BaseModel):
     fid: str = Field(..., description="The FID")
     cid: Optional[str] = Field(None, description="The CID to search in")
     placeId: Optional[str] = Field(None, description="The place ID to search in")
-    sortBy: Optional[ReviewSortBy] = Field(
-        ReviewSortBy.mostRelevant,
-        description="The sort order to use (enum value: 'mostRelevant', 'newest', 'highestRating', 'lowestRating')",
+    sortBy: Optional[str] = Field(
+        "mostRelevant",
+        pattern=r"^(mostRelevant|newest|highestRating|lowestRating)$",
+        description="The sort order to use (enum value as string: 'mostRelevant', 'newest', 'highestRating', 'lowestRating')",
     )
     topicId: Optional[str] = Field(None, description="The topic ID to search in")
     nextPageToken: Optional[str] = Field(None, description="The next page token to use")
@@ -76,13 +79,15 @@ class ReviewsRequest(BaseModel):
 
 
 class ShoppingRequest(BaseRequest):
-    autocorrect: Optional[bool] = Field(
-        True, description="Automatically correct (boolean value: true/false)"
+    autocorrect: Optional[str] = Field(
+        "true",
+        pattern=r"^(true|false)$",
+        description="Automatically correct (boolean value as string: 'true' or 'false')",
     )
-    num: int = Field(
-        10,
-        le=100,
-        description="The number of results to return, max is 100 (integer value)",
+    num: str = Field(
+        "10",
+        pattern=r"^([1-9]|[1-9]\d|100)$",
+        description="The number of results to return, max is 100 (integer value as string)",
     )
 
 
@@ -98,21 +103,22 @@ class LensRequest(BaseModel):
 
 class ParentsRequest(BaseModel):
     q: str = Field(..., description="The query to search for")
-    num: int = Field(
-        10,
-        le=100,
-        description="The number of results to return, max is 100 (integer value)",
+    num: str = Field(
+        "10",
+        pattern=r"^([1-9]|[1-9]\d|100)$",
+        description="The number of results to return, max is 100 (integer value as string)",
     )
-    page: Optional[int] = Field(
-        1,
-        ge=1,
-        description="The page number to return, first page is 1 (integer value)",
+    page: Optional[str] = Field(
+        "1",
+        pattern=r"^[1-9]\d*$",
+        description="The page number to return, first page is 1 (integer value as string)",
     )
 
 
 class WebpageRequest(BaseModel):
     url: str = Field(..., description="The url to scrape")
-    includeMarkdown: Optional[bool] = Field(
-        False,
-        description="Include markdown in the response (boolean value: true/false)",
+    includeMarkdown: Optional[str] = Field(
+        "false",
+        pattern=r"^(true|false)$",
+        description="Include markdown in the response (boolean value as string: 'true' or 'false')",
     )
