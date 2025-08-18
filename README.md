@@ -113,7 +113,8 @@ npx @modelcontextprotocol/inspector uvx serper-mcp-server
 Or if you've installed the package in a specific directory or are developing on it:
 
 ```bash
-cd path/to/servers/src/serper
+git clone https://github.com/garylab/serper-mcp-server.git
+cd serper-mcp-server
 npx @modelcontextprotocol/inspector uv run serper-mcp-server -e SERPER_API_KEY=<the key>
 ```
 
