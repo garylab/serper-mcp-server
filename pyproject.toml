@@ -17,8 +17,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/garymengcom/serper-mcp-server"
-"Bug Tracker" = "https://github.com/garymengcom/serper-mcp-server/issues"
+"Homepage" = "https://github.com/garylab/serper-mcp-server"
+"Bug Tracker" = "https://github.com/garylab/serper-mcp-server/issues"
 "Author Blog" = "https://garymeng.com"
 
 [build-system]
