@@ -1,8 +1,9 @@
 # Serper MCP Server
 
+[![PyPI version](https://badge.fury.io/py/serper-mcp-server.svg)](https://badge.fury.io/py/serper-mcp-server)
 [![PyPI Downloads](https://static.pepy.tech/badge/serper-mcp-server)](https://pepy.tech/project/serper-mcp-server)
 [![Monthly Downloads](https://static.pepy.tech/badge/serper-mcp-server/month)](https://pepy.tech/project/serper-mcp-server)
-[![Python Version](https://img.shields.io/pypi/pyversions/serper-mcp-server)](https://pypi.org/project/serper-mcp-server/)
+[![Python Version](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/)
 
 A Model Context Protocol server that provides **Google Search via Serper**. This server enables LLMs to get search result information from Google.
 
