@@ -101,7 +101,7 @@ class LensRequest(BaseModel):
     )
 
 
-class ParentsRequest(BaseModel):
+class PatentsRequest(BaseModel):
     q: str = Field(..., description="The query to search for")
     num: str = Field(
         "10",

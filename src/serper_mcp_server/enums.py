@@ -12,7 +12,7 @@ class SerperTools(StrEnum):
     GOOGLE_SEARCH_SHOPPING = "google_search_shopping"
     GOOGLE_SEARCH_LENS = "google_search_lens"
     GOOGLE_SEARCH_SCHOLAR = "google_search_scholar"
-    GOOGLE_SEARCH_PARENTS = "google_search_parents"
+    GOOGLE_SEARCH_PATENTS = "google_search_patents"
     GOOGLE_SEARCH_AUTOCOMPLETE = "google_search_autocomplete"
     WEBPAGE_SCRAPE = "webpage_scrape"
 

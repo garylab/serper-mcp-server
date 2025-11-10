@@ -14,7 +14,7 @@ from .schemas import (
     ShoppingRequest,
     LensRequest,
     AutocorrectRequest,
-    ParentsRequest,
+    PatentsRequest,
     WebpageRequest
 )
 
@@ -33,7 +33,7 @@ google_request_map = {
     SerperTools.GOOGLE_SEARCH_SHOPPING: ShoppingRequest,
     SerperTools.GOOGLE_SEARCH_LENS: LensRequest,
     SerperTools.GOOGLE_SEARCH_SCHOLAR: AutocorrectRequest,
-    SerperTools.GOOGLE_SEARCH_PARENTS: ParentsRequest,
+    SerperTools.GOOGLE_SEARCH_PATENTS: PatentsRequest,
     SerperTools.GOOGLE_SEARCH_AUTOCOMPLETE: AutocorrectRequest,
 }
 

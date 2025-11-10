@@ -19,7 +19,7 @@ A Model Context Protocol server that provides **Google Search via Serper**. This
 - `google_search_shopping` - Set [all the parameters](src/serper_mcp_server/schemas.py#L45)
 - `google_search_lens` - Set [all the parameters](src/serper_mcp_server/schemas.py#L50)
 - `google_search_scholar` - Set [all the parameters](src/serper_mcp_server/schemas.py#L20)
-- `google_search_parents` - Set [all the parameters](src/serper_mcp_server/schemas.py#L56)
+- `google_search_patents` - Set [all the parameters](src/serper_mcp_server/schemas.py#L56)
 - `google_search_autocomplete` - Set [all the parameters](src/serper_mcp_server/schemas.py#L20)
 - `webpage_scrape` - Set [all the parameters](src/serper_mcp_server/schemas.py#L62)
 
