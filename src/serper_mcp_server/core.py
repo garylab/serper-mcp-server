@@ -12,7 +12,6 @@ SERPER_API_KEY = str.strip(os.getenv("SERPER_API_KEY", ""))
 AIOHTTP_TIMEOUT = int(os.getenv("AIOHTTP_TIMEOUT", "15"))
 
 
-
 async def google(tool: SerperTools, request: BaseModel) -> Dict[str, Any]:
     uri_path = tool.value.split("_")[-1]
     url = f"https://google.serper.dev/{uri_path}"
@@ -88,7 +87,5 @@ async def fetch_json(url: str, request: BaseModel) -> Dict[str, Any]:
                 response.raise_for_status()
                 return await response.json()
             except aiohttp.ClientResponseError as e:
-                 # Return empty dict or re-raise? Original code didn't handle much.
-                 # But we rely on exceptions for gathering.
-                 raise e
+                raise e
 
