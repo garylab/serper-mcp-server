@@ -122,3 +122,8 @@ class WebpageRequest(BaseModel):
         pattern=r"^(true|false)$",
         description="Include markdown in the response (boolean value as string: 'true' or 'false')",
     )
+
+
+class DeepResearchRequest(BaseModel):
+    """Request model for deep research - focuses on the query field only."""
+    q: str = Field(..., description="The query to perform deep research on")

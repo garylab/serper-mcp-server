@@ -15,6 +15,7 @@ class SerperTools(StrEnum):
     GOOGLE_SEARCH_PATENTS = "google_search_patents"
     GOOGLE_SEARCH_AUTOCOMPLETE = "google_search_autocomplete"
     WEBPAGE_SCRAPE = "webpage_scrape"
+    DEEP_RESEARCH = "deep_research"
 
     @classmethod
     def has_value(cls, value: str) -> bool:
